@@ -1,0 +1,4 @@
+aiohttp
+beautifulsoup4
+jaccount_cli
+typer
