@@ -74,3 +74,7 @@ Please enter password:
 Here is your SID:
 f81e97be727da18e388d6fa53782e00a74d907ab75e20b39973392f0fad480c6
 ```
+
+## Acknowledgements
+- [python-jaccount-cli](https://github.com/tc-imba/python-jaccount-cli)
+
