@@ -3,9 +3,9 @@ from aiohttp import ClientSession
 from bs4 import BeautifulSoup
 
 
-async def get_canvas_token():
+async def get_canvas_token(enable_mask: bool):
     async with JaccountCLILogin("https://umjicanvas.com/login/openid_connect") as cli:
-        await cli.login()
+        await cli.login(enable_mask)
         async with cli.session.get(
             "https://umjicanvas.com/profile/settings"
         ) as response:
