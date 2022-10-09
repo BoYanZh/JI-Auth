@@ -1,9 +1,9 @@
 from ji_auth.login import JaccountCLILogin
 
 
-async def get_joj_sid():
+async def get_joj_sid(enable_mask: bool):
     async with JaccountCLILogin("https://joj.sjtu.edu.cn/login/jaccount") as cli:
-        await cli.login()
+        await cli.login(enable_mask)
         cookies = cli.get_cookies()
         return cookies["sid"].value
 
@@ -11,5 +11,5 @@ async def get_joj_sid():
 if __name__ == "__main__":
     import asyncio
 
-    res = asyncio.get_event_loop().run_until_complete(get_joj_sid())
+    res = asyncio.get_event_loop().run_until_complete(get_joj_sid(True))
     print(res)
