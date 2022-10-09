@@ -38,5 +38,5 @@ async def get_canvas_token(enable_mask: bool):
 if __name__ == "__main__":
     import asyncio
 
-    res = asyncio.get_event_loop().run_until_complete(get_canvas_token())
+    res = asyncio.get_event_loop().run_until_complete(get_canvas_token(True))
     print(res)
