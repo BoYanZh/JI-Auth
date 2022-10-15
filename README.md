@@ -12,7 +12,8 @@ $ ji-auth --help
 Usage: __main__.py [OPTIONS] COMMAND [ARGS]...
 
 Options:
-  --help  Show this message and exit.
+  --version  Show version.
+  --help     Show this message and exit.
 
 Commands:
   canvas  Get a newly generated token from Canvas.
