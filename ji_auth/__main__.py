@@ -2,7 +2,7 @@ __version__ = "0.0.3"
 
 from ji_auth.canvas import get_canvas_token
 from ji_auth.joj import get_joj_sid
-from typer import Typer, echo, Option
+from typer import Typer, echo, Option, Exit, main
 import asyncio
 import sys
 
@@ -45,5 +45,24 @@ def echo_canvas_token(
         echo(e, file=sys.stderr)
 
 
+def version_callback(value: bool) -> None:
+    if value:
+        echo(__version__)
+        raise Exit()
+
+
+def show_version(
+    version: bool = Option(
+        None, "--version", callback=version_callback, help="Show version."
+    ),
+) -> None:
+    pass
+
+
 if __name__ == "__main__":
-    app()
+    click_command = main.get_group(app)
+    parameters = main.get_params_from_function(show_version)
+    (version_param,) = parameters.values()
+    click_version_param, _ = main.get_click_param(version_param)
+    click_command.params.append(click_version_param)
+    click_command()
