@@ -9,6 +9,27 @@ import sys
 app = Typer(add_completion=False)
 
 
+def version_callback(value: bool) -> None:
+    if value:
+        echo(__version__)
+        raise Exit()
+
+
+def show_version(
+    version: bool = Option(
+        None, "--version", callback=version_callback, help="Show version."
+    ),
+) -> None:
+    pass
+
+
+app = main.get_group(app)
+parameters = main.get_params_from_function(show_version)
+(version_param,) = parameters.values()
+click_version_param, _ = main.get_click_param(version_param)
+app.params.append(click_version_param)
+
+
 @app.command("joj")
 def echo_joj_sid(
     disable_mask: bool = Option(
@@ -37,7 +58,9 @@ def echo_canvas_token(
     Get a newly generated token from Canvas.
     """
     try:
-        res = asyncio.get_event_loop().run_until_complete(get_canvas_token(not disable_mask))
+        res = asyncio.get_event_loop().run_until_complete(
+            get_canvas_token(not disable_mask)
+        )
         echo("Here is your token:", file=sys.stderr)
         echo(res)
     except Exception as e:
@@ -45,24 +68,5 @@ def echo_canvas_token(
         echo(e, file=sys.stderr)
 
 
-def version_callback(value: bool) -> None:
-    if value:
-        echo(__version__)
-        raise Exit()
-
-
-def show_version(
-    version: bool = Option(
-        None, "--version", callback=version_callback, help="Show version."
-    ),
-) -> None:
-    pass
-
-
 if __name__ == "__main__":
-    click_command = main.get_group(app)
-    parameters = main.get_params_from_function(show_version)
-    (version_param,) = parameters.values()
-    click_version_param, _ = main.get_click_param(version_param)
-    click_command.params.append(click_version_param)
-    click_command()
+    app()
