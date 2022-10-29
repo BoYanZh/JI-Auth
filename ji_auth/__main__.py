@@ -23,13 +23,6 @@ def show_version(
     pass
 
 
-app = main.get_group(app)
-parameters = main.get_params_from_function(show_version)
-(version_param,) = parameters.values()
-click_version_param, _ = main.get_click_param(version_param)
-app.params.append(click_version_param)
-
-
 @app.command("joj")
 def echo_joj_sid(
     disable_mask: bool = Option(
@@ -66,6 +59,13 @@ def echo_canvas_token(
     except Exception as e:
         echo("Oops, Something went wrong. Please try again.", file=sys.stderr)
         echo(e, file=sys.stderr)
+
+
+app = main.get_group(app)
+parameters = main.get_params_from_function(show_version)
+(version_param,) = parameters.values()
+click_version_param, _ = main.get_click_param(version_param)
+app.params.append(click_version_param)
 
 
 if __name__ == "__main__":
