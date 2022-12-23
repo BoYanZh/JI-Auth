@@ -33,7 +33,7 @@ def echo_joj_sid(
     Get the SID from JOJ cookies.
     """
     try:
-        res = asyncio.get_event_loop().run_until_complete(get_joj_sid(not disable_mask))
+        res = asyncio.run(get_joj_sid(not disable_mask))
         echo("Here is your SID:", file=sys.stderr)
         echo(res)
     except Exception as e:
@@ -51,7 +51,7 @@ def echo_canvas_token(
     Get a newly generated token from Canvas.
     """
     try:
-        res = asyncio.get_event_loop().run_until_complete(
+        res = asyncio.run(
             get_canvas_token(not disable_mask)
         )
         echo("Here is your token:", file=sys.stderr)

@@ -11,5 +11,5 @@ async def get_joj_sid(enable_mask: bool):
 if __name__ == "__main__":
     import asyncio
 
-    res = asyncio.get_event_loop().run_until_complete(get_joj_sid(True))
+    res = asyncio.run(get_joj_sid(True))
     print(res)
