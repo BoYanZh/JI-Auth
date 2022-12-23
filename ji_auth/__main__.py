@@ -2,6 +2,7 @@ __version__ = "0.0.6"
 
 from ji_auth.canvas import get_canvas_token
 from ji_auth.joj import get_joj_sid
+from ji_auth.coursesel import get_coursesel_jsid
 from typer import Typer, echo, Option, Exit, main
 import asyncio
 import sys
@@ -40,6 +41,22 @@ def echo_joj_sid(
         echo("Oops, Something went wrong. Please try again.", file=sys.stderr)
         echo(e, file=sys.stderr)
 
+@app.command("coursesel")
+def echo_coursesel_sid(
+    disable_mask: bool = Option(
+        False, "--disable-mask", help="Use stdin instead of TTY to input password."
+    )
+):
+    """
+    Get the JSESSIONID from JI Coursesel.
+    """
+    try:
+        res = asyncio.run(get_coursesel_jsid(not disable_mask))
+        echo("Here is your JSESSIONID:", file=sys.stderr)
+        echo(res)
+    except Exception as e:
+        echo("Oops, Something went wrong. Please try again.", file=sys.stderr)
+        echo(e, file=sys.stderr)
 
 @app.command("canvas")
 def echo_canvas_token(
