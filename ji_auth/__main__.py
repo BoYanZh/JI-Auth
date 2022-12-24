@@ -1,4 +1,4 @@
-__version__ = "0.0.6"
+__version__ = "0.0.7"
 
 from ji_auth.canvas import get_canvas_token
 from ji_auth.joj import get_joj_sid
