@@ -293,4 +293,7 @@ dmypy.json
 !.vscode/extensions.json
 *.code-workspace
 
+### MacOS system file
+**/.DS_Store
+
 # End of https://www.toptal.com/developers/gitignore/api/vscode,python
