@@ -4,10 +4,10 @@ from bs4 import BeautifulSoup
 
 
 async def get_canvas_token(enable_mask: bool):
-    async with JaccountCLILogin("https://umjicanvas.com/login/openid_connect") as cli:
+    async with JaccountCLILogin("https://jicanvas.com/login/openid_connect") as cli:
         await cli.login(enable_mask)
         async with cli.session.get(
-            "https://umjicanvas.com/profile/settings"
+            "https://jicanvas.com/profile/settings"
         ) as response:
             body = await response.text()
         soup = BeautifulSoup(body, "html.parser")
@@ -17,7 +17,7 @@ async def get_canvas_token(enable_mask: bool):
                 authenticity_token = x["value"]
                 break
         cookies = cli.get_cookies()
-    url = "https://umjicanvas.com/profile/tokens"
+    url = "https://jicanvas.com/profile/tokens"
     async with ClientSession() as session:
         async with session.post(
             url,
