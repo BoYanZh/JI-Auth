@@ -1,4 +1,4 @@
 aiohttp
 beautifulsoup4
-jaccount_cli
+jaccount_auth
 typer

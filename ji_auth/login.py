@@ -1,4 +1,4 @@
-from jaccount_cli import JaccountCLIAsyncIO
+from jaccount_auth import JaccountCLIAsyncIO
 from getpass import getpass
 
 
