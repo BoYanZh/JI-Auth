@@ -4,6 +4,7 @@ from bs4 import BeautifulSoup
 
 
 async def get_canvas_token(enable_mask: bool):
+    authenticity_token = ""
     async with JaccountCLILogin("https://jicanvas.com/login/openid_connect") as cli:
         await cli.login(enable_mask)
         async with cli.session.get(
